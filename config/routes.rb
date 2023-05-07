@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     get 'followers' => 'relationships#followers', as: 'followers'
   end
   get '/search', to: 'searches#search'
+  get "tag_search"=>"books#tag_search"
   
   devise_scope :user do
     post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'

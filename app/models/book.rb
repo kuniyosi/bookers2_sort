@@ -9,6 +9,10 @@ class Book < ApplicationRecord
 
   validates :title,presence:true
   validates :body,presence:true,length:{maximum:200}
+  validates :tag,presence:true
+  
+  scope :latest, -> {order(created_at: :desc)}
+  scope :old, -> {order(created_at: :asc)}
 
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)

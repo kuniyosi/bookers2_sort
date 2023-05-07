@@ -18,6 +18,13 @@ class BooksController < ApplicationController
         b.favorited_users.includes(:favorites).where(created_at: from...to).size <=>
         a.favorited_users.includes(:favorites).where(created_at: from...to).size
       }
+    if params[:latest]
+      @books = Book.latest
+    elsif params[:old]
+      @books = Book.old
+     else
+      @books = Book.all
+    end
     @book = Book.new
   end
 
@@ -57,10 +64,15 @@ class BooksController < ApplicationController
     redirect_to books_path
   end
 
+  def tag_search
+    @books_tag=Book.all
+    @tag=Book.find_by(params[:tag])
+  end
+
   private
 
   def book_params
-    params.require(:book).permit(:title, :body)
+    params.require(:book).permit(:title, :body, :tag)
   end
 
   def ensure_correct_user

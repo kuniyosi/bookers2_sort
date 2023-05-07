@@ -1,0 +1,40 @@
+<div class="container">
+<h5>タグが<%= @tag %>の投稿一覧</h5>
+
+<!--タグリスト-->
+<% @books_tag.each do |book|%>
+ <td><%= book.body %></td>
+ <td><%= book.tag %></td>
+<div class="card">
+  <div class="card-body">
+    <!--タイトル表示される文字数は２５文字までにしてます-->
+    <h6 class="card-title">
+      <%=link_to book_path(book.id) do %><%= book.title.truncate(25) %>
+      <% end %>
+    </h6>
+    <!--お気に入り、コメント数、投稿者は部分テンプレ-->
+
+
+  </div>
+</div>
+<% end %>
+
+<div class="pagination pagination-sm justify-content-center">
+
+</div>
+
+
+<style>
+.card{
+  padding:0;
+  margin:0;
+  border:none;
+}
+
+
+
+h6 {
+  /*線の種類（実線） 太さ 色*/
+  border-bottom: solid 3px black;
+}
+</style>
